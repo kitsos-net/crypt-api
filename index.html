@@ -6,8 +6,8 @@
     <title>Kitsos Crypt API - OpenAPI Documentation</title>
 
     <!-- Swagger UI Styles -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui.min.css">
+
     <!-- Favicons & Web App Meta -->
     <link rel="icon" type="image/png" href="https://cdn.kitsos.net/logos/fav/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="https://cdn.kitsos.net/logos/fav/favicon.svg" />
@@ -15,6 +15,26 @@
     <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.kitsos.net/logos/fav/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Kitsos" />
     <link rel="manifest" href="https://cdn.kitsos.net/logos/fav/site.webmanifest" />
+
+    <!-- Optional Dark Mode -->
+    <style>
+        body {
+            margin: 0;
+            background: #0f172a;
+        }
+
+        .swagger-ui {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        .swagger-ui img {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        .topbar {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,14 +42,29 @@
     <div id="openapi"></div>
 
     <!-- Swagger UI Scripts -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui-standalone-preset.min.js"></script>
+
     <script>
         window.onload = function () {
-            const ui = SwaggerUIBundle({
-                url: "openapi.yaml", 
-                dom_id: "#openapi"
-            })
-        }
+            try {
+                window.ui = SwaggerUIBundle({
+                    url: "./openapi.yaml",
+                    dom_id: "#openapi",
+                    deepLinking: true,
+                    displayRequestDuration: true,
+                    presets: [
+                        SwaggerUIBundle.presets.apis,
+                        SwaggerUIStandalonePreset
+                    ],
+                    layout: "StandaloneLayout",
+                    docExpansion: "none"
+                });
+            } catch (e) {
+                document.body.innerHTML = "<h2 style='color:white'>Fehler beim Laden der API-Doku</h2>";
+                console.error(e);
+            }
+        };
     </script>
 </body>
 </html>
