@@ -16,7 +16,6 @@
     <meta name="apple-mobile-web-app-title" content="Kitsos" />
     <link rel="manifest" href="https://cdn.kitsos.net/logos/fav/site.webmanifest" />
 
-    <!-- Leichtes Custom Styling (kein Fake-Darkmode mehr) -->
     <style>
         body {
             margin: 0;
@@ -27,7 +26,6 @@
             display: none;
         }
 
-        /* etwas moderner Look */
         .swagger-ui .opblock {
             border-radius: 10px;
         }
@@ -54,9 +52,8 @@
                 deepLinking: true,
                 displayRequestDuration: true,
 
-                // 👉 ALLES AUFGEKLAPPT
                 docExpansion: "full",
-                defaultModelsExpandDepth: -1,   // Modelle ausblenden (optional cleaner)
+                defaultModelsExpandDepth: -1,
                 defaultModelExpandDepth: 2,
 
                 presets: [
