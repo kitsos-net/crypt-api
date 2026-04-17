@@ -16,29 +16,29 @@
     <meta name="apple-mobile-web-app-title" content="Kitsos" />
     <link rel="manifest" href="https://cdn.kitsos.net/logos/fav/site.webmanifest" />
 
-    <!-- Optional Dark Mode -->
+    <!-- Leichtes Custom Styling (kein Fake-Darkmode mehr) -->
     <style>
         body {
             margin: 0;
-            background: #0f172a;
-        }
-
-        .swagger-ui {
-            filter: invert(1) hue-rotate(180deg);
-        }
-
-        .swagger-ui img {
-            filter: invert(1) hue-rotate(180deg);
+            background: #f8fafc;
         }
 
         .topbar {
             display: none;
         }
+
+        /* etwas moderner Look */
+        .swagger-ui .opblock {
+            border-radius: 10px;
+        }
+
+        .swagger-ui .opblock-summary {
+            padding: 10px;
+        }
     </style>
 </head>
 
 <body>
-    <!-- Container für die API-Dokumentation -->
     <div id="openapi"></div>
 
     <!-- Swagger UI Scripts -->
@@ -47,23 +47,25 @@
 
     <script>
         window.onload = function () {
-            try {
-                window.ui = SwaggerUIBundle({
-                    url: "./openapi.yaml",
-                    dom_id: "#openapi",
-                    deepLinking: true,
-                    displayRequestDuration: true,
-                    presets: [
-                        SwaggerUIBundle.presets.apis,
-                        SwaggerUIStandalonePreset
-                    ],
-                    layout: "StandaloneLayout",
-                    docExpansion: "none"
-                });
-            } catch (e) {
-                document.body.innerHTML = "<h2 style='color:white'>Fehler beim Laden der API-Doku</h2>";
-                console.error(e);
-            }
+            window.ui = SwaggerUIBundle({
+                url: "./openapi.yaml",
+                dom_id: "#openapi",
+
+                deepLinking: true,
+                displayRequestDuration: true,
+
+                // 👉 ALLES AUFGEKLAPPT
+                docExpansion: "full",
+                defaultModelsExpandDepth: -1,   // Modelle ausblenden (optional cleaner)
+                defaultModelExpandDepth: 2,
+
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIStandalonePreset
+                ],
+
+                layout: "StandaloneLayout"
+            });
         };
     </script>
 </body>
